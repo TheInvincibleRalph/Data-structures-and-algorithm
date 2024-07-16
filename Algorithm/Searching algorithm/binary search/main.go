@@ -13,11 +13,14 @@ package main
 
 import "fmt"
 
+//this function takes a sorted array nums and an integer target as inputs and returns the index of the target if found, otherwise returns -1.
+
 func binSearch(arr []int, num int) int {
 	left := 0
 	right := len(arr) - 1
 
-	for left <= right {
+	for left <= right { //this loop continues as long as there is a valid search space (a constraint imposed by left <= right)
+		//recalculates m each iteration
 		m := (left + right) / 2
 		if arr[m] < num {
 			left = m + 1
