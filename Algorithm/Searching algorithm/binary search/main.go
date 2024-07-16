@@ -1,12 +1,16 @@
 /*
 Question
-
 Given an array of integers nums which is sorted in ascending order, and an integer target,
 write a function to search target in nums. If target exists, then return its index.
 Otherwise, return -1.
 
 You must write an algorithm with O(log n) runtime complexity. //this means the maximum number of operations needed to search the target number is a logarithmic function of the size of the search space.
 
+Constraints
+1) 1 <= len(arr) <= 104
+2) -104 < arr[i], num < 104
+3) All the integers in nums are unique.
+4) nums is sorted in ascending order.
 */
 
 package main
