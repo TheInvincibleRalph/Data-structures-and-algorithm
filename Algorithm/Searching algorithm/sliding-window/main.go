@@ -1,3 +1,10 @@
+/*
+Problem statement:
+Given the array `arr := []int{1, 4, 45, 6, 0, 19}` and `x := 51`,
+we need to find the minimum length of a contiguous subarray whose
+ sum is greater than `x`.
+*/
+
 package main
 
 import (
@@ -42,5 +49,11 @@ func min(a, b int) int {
 func main() {
 	arr := []int{1, 4, 45, 6, 0, 19}
 	x := 51
-	fmt.Println(minSubArrayLen(arr, x))
+	result := minSubArrayLen(arr, x)
+
+	if result == 0 {
+		fmt.Println("No subarray with sum greater than", x)
+	} else {
+		fmt.Println("Minimum length of subarray with sum greater than", x, "is", result)
+	}
 }
