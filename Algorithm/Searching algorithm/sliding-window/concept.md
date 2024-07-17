@@ -91,7 +91,7 @@ func main() {
 **Explanation**:
 
 1. **Initialization**:
-   - `minLength` is set to the maximum value that a 32-bit signed integer can hold (`math.MaxInt32`) to track the minimum length.
+   - `minLength` is set to the maximum value that a 32-bit signed integer can hold which is (2^31 -1) using (`math.MaxInt32`), to track the minimum length.
    - `currentSum` is initialized to 0 to store the sum of the current subarray or window.
    - `start` is initialized to 0 to mark the start of the current window.
 
