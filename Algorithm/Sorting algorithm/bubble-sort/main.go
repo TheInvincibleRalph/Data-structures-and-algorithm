@@ -19,5 +19,5 @@ func bubbleSort(arr []int) {
 func main() {
 	arr := []int{5, 3, 8, 4, 2}
 	bubbleSort(arr)  // Call the function to sort the array
-	fmt.Println(arr) // The array is now sorted
+	fmt.Println(arr) // The array is now sorted, go ahead to print it.
 }
