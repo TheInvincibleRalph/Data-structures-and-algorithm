@@ -43,7 +43,7 @@ func main() {
 }
 ```
 
-### Conceptual example
+### Concept Simulation
 
 Consider finding the square root of \( x = 10 \):
 
