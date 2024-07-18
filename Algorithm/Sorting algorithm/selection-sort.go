@@ -1,3 +1,5 @@
+// Principle: Select the smallest (or largest) element from the unsorted part and swap it with the first unsorted element.
+
 package main
 
 import "fmt"

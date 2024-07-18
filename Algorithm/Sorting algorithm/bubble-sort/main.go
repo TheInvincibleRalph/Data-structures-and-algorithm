@@ -1,3 +1,5 @@
+// Principle: Repeatedly swap adjacent elements if they are in the wrong order.
+
 package main
 
 import "fmt"
