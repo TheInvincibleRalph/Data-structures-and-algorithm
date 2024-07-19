@@ -117,10 +117,10 @@ To avoid these issues, make sure that each slice created during sorting is indep
 
 #### Visual example
 
-Suppose result is [1, 2], and left[i:] is [3, 4, 5]:
+Suppose `result` is `[1, 2]`, and `left[i:]` is `[3, 4, 5]`:
 
-- **Without Ellipses:** append(result, left[i:]) would give [1, 2, [3, 4, 5]]
+- **Without Ellipses:** `append(result, left[i:])` would give `[1, 2, [3, 4, 5]]`
 
-- **With Ellipses:** append(result, left[i:]...) would give [1, 2, 3, 4, 5] (unpacking the slice and adding each element individually).
+- **With Ellipses:** `append(result, left[i:]...)` would give `[1, 2, 3, 4, 5]` (unpacking the slice and adding each element individually).
 
-In conclusion, the ellipses are a way to "unpack" the slice into its individual elements when appending.
+In conclusion, the ellipses are just a way to "unpack" the slice into its individual elements when appending.
