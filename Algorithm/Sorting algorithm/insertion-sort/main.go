@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func insertionSort(arr []int) {
 	n := len(arr)
 	for i := 1; i < n; i++ {
@@ -13,4 +15,10 @@ func insertionSort(arr []int) {
 		//once the nested for loop above breaks out, the key moves to the next index and the operation is performed all over again
 	}
 
+}
+
+func main() {
+	arr := []int{12, 11, 13, 5, 6}
+	insertionSort(arr)
+	fmt.Println("Sorted array is:", arr)
 }
