@@ -8,7 +8,7 @@ func mergeSort(arr []int) {
 
 		mid := len(arr) / 2
 
-		// Create copies of the slices to avoid modifying the same underlying array
+		// Create copies of the slices at every recursive call to avoid modifying the same underlying array
 		left := append([]int(nil), arr[:mid]...)
 		right := append([]int(nil), arr[mid:]...)
 
