@@ -152,12 +152,12 @@ First, we need to build a max heap from the array. A max heap is a binary tree w
 
 At this point, we have built a max heap: `[82, 27, 43, 3, 9, 38, 10]`.
 
-          82
-        /    \
-       43     38
-      / \     / \
-    27   3   9   10
-*Max Heap Representation*
+                                        82
+                                      /    \
+                                     43     38
+                                    / \     / \
+                                  27   3   9   10
+                                *Initial Max Heap Represented on a Binary Tree*
 
 ### Step 2: Extract Elements from the Heap
 
