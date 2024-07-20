@@ -157,7 +157,7 @@ At this point, we have built a max heap: `[82, 27, 43, 3, 9, 38, 10]`.
        43     38
       / \     / \
     27   3   9   10
-Max Heap Representation
+*Max Heap Representation*
 
 ### Step 2: Extract Elements from the Heap
 
