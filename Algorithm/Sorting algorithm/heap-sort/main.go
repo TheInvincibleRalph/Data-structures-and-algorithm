@@ -4,7 +4,8 @@ import "fmt"
 
 func heapSort(arr []int) {
 	n := len(arr)
-	for i = n/2 - 1; i >= 0; i-- { //creates a sub-tree: the loop begins by choosing a root index (i) then calls the heapify function to determine its left and right children and then produce a max heap eventually. The i-- ensures that we move from the last non-leaf node towards the root
+
+	for i := n/2 - 1; i >= 0; i-- { //creates a sub-tree: the loop begins by choosing a root index (i) then calls the heapify function to determine its left and right children and then produce a max heap eventually. The i-- ensures that we move from the last non-leaf node towards the root
 		heapify(arr, n, i) //the heapify function takes the array, the length of the array, and the root index as parameters
 	}
 
