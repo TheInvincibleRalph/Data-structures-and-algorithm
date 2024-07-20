@@ -15,3 +15,11 @@ Sorting algorithms are designed to arrange elements of a list in a specific orde
 4. **Insertion**: Used in Insertion Sort, where elements are inserted into their correct position within a sorted sublist.
 5. **Heap Structure**: Used in Heap Sort, where a binary heap is used to maintain order.
 6. **Digit-wise Sorting**: Used in Radix Sort, where sorting is performed on individual digits or parts of the elements.
+
+
+
+          82
+        /    \
+       43     38
+      / \     / \
+    27   3   9   10
