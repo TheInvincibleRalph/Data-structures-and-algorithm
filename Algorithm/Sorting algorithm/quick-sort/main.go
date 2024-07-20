@@ -1,3 +1,11 @@
+/*
+Principle: Select a 'pivot' element and partition the array around
+the pivot such that elements less than the pivot are on the left,
+and elements greater than the pivot are on the right.
+
+Logic: Recursively sort the sub-arrays before and after the pivot.
+*/
+
 package main
 
 import "fmt"
