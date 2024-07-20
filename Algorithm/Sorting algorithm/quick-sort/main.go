@@ -15,7 +15,7 @@ func quickSorter(arr []int, low, high int) {
 
 	if low < high {
 		p := partition(arr, low, high)
-		quickSorter(arr, low, p-1)  //the array at left-hand side of the pivot element with its low and high indexes
+		quickSorter(arr, low, p-1)  //the array at left-hand side of the pivot (p) element with its low and high indexes (p is the index of the pivot as returned by the partition function)
 		quickSorter(arr, p+1, high) //the array at the right-hand side of the pivot element with its low and high indexes
 	}
 }
