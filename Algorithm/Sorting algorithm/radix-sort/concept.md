@@ -6,6 +6,9 @@ Given the array:
 
 ## Step-by-Step Simulation on Ones Place Value
 
+### Get Maximum Number
+This step gets the maximum number/value within the array which helps to determine the number of digits we are performing count sort on.
+
 ### Counting Occurrences by Ones Place
 This process sorts the array by the least significant digit. For example, if 7 is in one-th place in a digit, it is placed at index 7 in a counting array.
 
