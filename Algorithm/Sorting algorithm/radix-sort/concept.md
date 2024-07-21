@@ -328,7 +328,7 @@ Let's start by counting the occurrences of each tens digit.
 
 ### Correctly Sorted Array by Tens Place
 
-The array sorted by the tens place should now be:
+The final output which is the array sorted by the tens place should now be:
 ```
 [3, 9, 10, 27, 38, 43, 82]
 ```
