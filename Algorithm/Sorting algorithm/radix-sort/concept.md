@@ -386,15 +386,17 @@ Consider sorting by the ones place with the array:
 Update the count array to reflect cumulative counts:
 1. Add each count to the count of the previous index:
    ```
-   count[1] = count[1] + count[0] => 0 + 1 = 1
-   count[2] = count[2] + count[1] => 1 + 1 = 2
-   count[3] = count[3] + count[2] => 2 + 2 = 4
-   count[4] = count[4] + count[3] => 0 + 4 = 4
-   count[5] = count[5] + count[4] => 0 + 4 = 4
-   count[6] = count[6] + count[5] => 0 + 4 = 4
-   count[7] = count[7] + count[6] => 1 + 4 = 5
-   count[8] = count[8] + count[7] => 1 + 5 = 6
-   count[9] = count[9] + count[8] => 1 + 6 = 7
+   Initial count = initial count + preceeding digit 
+
+      count[1] = count[1] + count[0] => 0 + 1 = 1
+      count[2] = count[2] + count[1] => 1 + 1 = 2
+      count[3] = count[3] + count[2] => 2 + 2 = 4
+      count[4] = count[4] + count[3] => 0 + 4 = 4
+      count[5] = count[5] + count[4] => 0 + 4 = 4
+      count[6] = count[6] + count[5] => 0 + 4 = 4
+      count[7] = count[7] + count[6] => 1 + 4 = 5
+      count[8] = count[8] + count[7] => 1 + 5 = 6
+      count[9] = count[9] + count[8] => 1 + 6 = 7
    ```
 
    Resulting cumulative count array:
