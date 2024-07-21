@@ -390,11 +390,143 @@ The array sorted by the tens place should now be:
 [3, 9, 10, 27, 38, 43, 82]
 ```
 
-### Logic Behind the Code
+## Logic Behind the Code
 
-- **Digit Position Processing:** Radix sort processes each digit position starting from the least significant digit to the most significant digit.
-- **Counting Sort Utilization:** The algorithm leverages counting sort to handle each digit's occurrences and ensures stability.
-- **Cumulative Count:** The cumulative count array helps determine the correct positions of elements in the output array.
+1. **Counting Occurrences:**
+   - Count the number of times each digit appears at the current place value.
+   - Store these counts in a `count` array.
+
+2. **Transform to Cumulative Count:**
+   - Update the `count` array to reflect the cumulative counts. This means each position in the `count` array will store the sum of counts up to that position.
+   - The cumulative count helps determine the exact index at which each element should be placed in the output array.
+
+3. **Building the Output Array:**
+   - Traverse the original array from right to left (to maintain stability).
+   - Use the cumulative count array to place each element in the correct position in the output array.
+   - Adjust the cumulative counts as you place elements.
+
+### Detailed Example
+
+Consider sorting by the ones place with the array:
+```
+[38, 27, 43, 3, 9, 82, 10]
+```
+
+### Step 1: Counting Occurrences
+
+1. Initialize a count array for digit values (0-9):
+   ```
+   count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   ```
+
+2. Count the occurrences of each ones digit:
+   ```
+   38 -> 8  => count[8]++
+   27 -> 7  => count[7]++
+   43 -> 3  => count[3]++
+   3  -> 3  => count[3]++
+   9  -> 9  => count[9]++
+   82 -> 2  => count[2]++
+   10 -> 0  => count[0]++
+   ```
+
+   Resulting count array:
+   ```
+   count = [1, 0, 1, 2, 0, 0, 0, 1, 1, 1]
+   ```
+
+### Step 2: Transform to Cumulative Count
+
+Update the count array to reflect cumulative counts:
+1. Add each count to the count of the previous index:
+   ```
+   count[1] = count[1] + count[0] => 0 + 1 = 1
+   count[2] = count[2] + count[1] => 1 + 1 = 2
+   count[3] = count[3] + count[2] => 2 + 2 = 4
+   count[4] = count[4] + count[3] => 0 + 4 = 4
+   count[5] = count[5] + count[4] => 0 + 4 = 4
+   count[6] = count[6] + count[5] => 0 + 4 = 4
+   count[7] = count[7] + count[6] => 1 + 4 = 5
+   count[8] = count[8] + count[7] => 1 + 5 = 6
+   count[9] = count[9] + count[8] => 1 + 6 = 7
+   ```
+
+   Resulting cumulative count array:
+   ```
+   count = [1, 1, 2, 4, 4, 4, 4, 5, 6, 7]
+   ```
+
+### Step 3: Building the Output Array
+
+1. Initialize an output array of the same length:
+   ```
+   output = [0, 0, 0, 0, 0, 0, 0]
+   ```
+
+2. Traverse the original array from right to left, placing each element in its correct position using the cumulative count array, and then decrement the cumulative count for that digit:
+
+   - **Number: 10, Ones Digit: 0**
+     - Place 10 at `count[0] - 1 = 0`
+     - Decrement `count[0]`
+     ```
+     output = [10, 0, 0, 0, 0, 0, 0]
+     count = [0, 1, 2, 4, 4, 4, 4, 5, 6, 7]
+     ```
+
+   - **Number: 82, Ones Digit: 2**
+     - Place 82 at `count[2] - 1 = 1`
+     - Decrement `count[2]`
+     ```
+     output = [10, 82, 0, 0, 0, 0, 0]
+     count = [0, 1, 1, 4, 4, 4, 4, 5, 6, 7]
+     ```
+
+   - **Number: 9, Ones Digit: 9**
+     - Place 9 at `count[9] - 1 = 6`
+     - Decrement `count[9]`
+     ```
+     output = [10, 82, 0, 0, 0, 0, 9]
+     count = [0, 1, 1, 4, 4, 4, 4, 5, 6, 6]
+     ```
+
+   - **Number: 3, Ones Digit: 3**
+     - Place 3 at `count[3] - 1 = 3`
+     - Decrement `count[3]`
+     ```
+     output = [10, 82, 0, 3, 0, 0, 9]
+     count = [0, 1, 1, 3, 4, 4, 4, 5, 6, 6]
+     ```
+
+   - **Number: 43, Ones Digit: 3**
+     - Place 43 at `count[3] - 1 = 2`
+     - Decrement `count[3]`
+     ```
+     output = [10, 82, 43, 3, 0, 0, 9]
+     count = [0, 1, 1, 2, 4, 4, 4, 5, 6, 6]
+     ```
+
+   - **Number: 27, Ones Digit: 7**
+     - Place 27 at `count[7] - 1 = 4`
+     - Decrement `count[7]`
+     ```
+     output = [10, 82, 43, 3, 27, 0, 9]
+     count = [0, 1, 1, 2, 4, 4, 4, 4, 6, 6]
+     ```
+
+   - **Number: 38, Ones Digit: 8**
+     - Place 38 at `count[8] - 1 = 5`
+     - Decrement `count[8]`
+     ```
+     output = [10, 82, 43, 3, 27, 38, 9]
+     count = [0, 1, 1, 2, 4, 4, 4, 4, 5, 6]
+     ```
+
+### Result
+
+After sorting by the ones place, the array is:
+```
+[10, 82, 43, 3, 27, 38, 9]
+```
 
 
 
@@ -412,12 +544,4 @@ The array sorted by the tens place should now be:
 
 
 
-### Overview of Each Step and Keyword
-
-- **Digit Position:** Each iteration focuses on sorting elements based on a specific digit position, starting from the least significant to the most significant.
-- **
-
-**Counting Sort:** Counting sort is applied at each digit level, ensuring the algorithm is stable and correctly sorts elements at each step.
-- **Cumulative Count:** The cumulative count array helps place elements in the correct position in the output array.
-- **Stability:** Ensures that elements with the same digit values appear in the same order as they were in the input array.
 
