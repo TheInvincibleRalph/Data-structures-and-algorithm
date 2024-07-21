@@ -18,8 +18,4 @@ Sorting algorithms are designed to arrange elements of a list in a specific orde
 
 
 
-          82
-        /    \
-       43     38
-      / \     / \
-    27   3   9   10
+ 
