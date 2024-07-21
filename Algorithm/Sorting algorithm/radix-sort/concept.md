@@ -386,7 +386,7 @@ Consider sorting by the ones place with the array:
 Update the count array to reflect cumulative counts:
 1. Add each count to the count of the previous index:
    ```
-   Initial count = initial count + preceeding digit 
+   Initial count = initial count + preceeding digit => Cumulative count 
 
       count[1] = count[1] + count[0] => 0 + 1 = 1
       count[2] = count[2] + count[1] => 1 + 1 = 2
