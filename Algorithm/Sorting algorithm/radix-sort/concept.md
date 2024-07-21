@@ -167,19 +167,6 @@ The array sorted by the ones place is:
 [10, 82, 43, 3, 27, 38, 9]
 ```
 
-### Recap of Radix Sort Steps
-
-1. **Sort by Least Significant Digit (Ones Place):**
-   ```
-   [10, 82, 43, 3, 27, 38, 9]
-   ```
-
-2. **Sort by Next Significant Digit (Tens Place):**
-   ```
-   [3, 9, 10, 27, 38, 43, 82]
-   ```
-
-
 ## Step-by-Step Simulation on Tens Place Value
 
 Given the array after sorting by the least significant digit:
@@ -356,9 +343,11 @@ The array sorted by the tens place should now be:
    - The cumulative count helps determine the exact index at which each element should be placed in the output array.
 
 3. **The Output Array:**
-   - Traverse the original array from right to left (to maintain stability-the relative order of elements with equal values).
    - The cumulative count array helps to place each element in the correct position in the output array.
-   - The cumulative count array is continuously adjusted as elements are placed in the output array.
+
+   - The output array at the end of each place value operation is first traversed from right to left (to maintain stability-the relative order of elements with equal values).
+
+   - The cumulative count array is then continuously adjusted as elements are placed in the output array.
 
 ### Detailed Example
 
