@@ -180,50 +180,6 @@ The array sorted by the ones place is:
    ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Step-by-Step Simulation on Tens Place Value
 
 Given the array after sorting by the least significant digit:
@@ -392,18 +348,17 @@ The array sorted by the tens place should now be:
 
 ## Logic Behind the Code
 
-1. **Counting Occurrences:**
-   - Count the number of times each digit appears at the current place value.
-   - Store these counts in a `count` array.
+1. **The Count Array:**
+   - This takes record of the number of times each digit appears at the current place value.
 
-2. **Transform to Cumulative Count:**
-   - Update the `count` array to reflect the cumulative counts. This means each position in the `count` array will store the sum of counts up to that position.
+2. **Cumulative Count:**
+   - This process updates the `count` array to reflect cumulative count of the occurences. In this step, each position in the `count` array will store the sum of counts up to that position.
    - The cumulative count helps determine the exact index at which each element should be placed in the output array.
 
-3. **Building the Output Array:**
-   - Traverse the original array from right to left (to maintain stability).
-   - Use the cumulative count array to place each element in the correct position in the output array.
-   - Adjust the cumulative counts as you place elements.
+3. **The Output Array:**
+   - Traverse the original array from right to left (to maintain stability-the relative order of elements with equal values).
+   - The cumulative count array helps to place each element in the correct position in the output array.
+   - The cumulative count array is continuously adjusted as elements are placed in the output array.
 
 ### Detailed Example
 
