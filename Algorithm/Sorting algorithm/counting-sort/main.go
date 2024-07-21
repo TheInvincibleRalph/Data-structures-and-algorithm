@@ -14,10 +14,9 @@ func countSort(arr []int) []int {
 
 	// fmt.Println(max)
 
-	//create and initialize the count and output array
+	//create and initialize the count array
 	n := len(arr)
 	count := make([]int, max+1)
-	output := make([]int, n)
 	// fmt.Println(output)
 	// fmt.Println(count)
 
@@ -34,6 +33,7 @@ func countSort(arr []int) []int {
 	}
 
 	//build output array
+	output := make([]int, n)
 	for i := n - 1; i >= 0; i-- {
 		output[count[arr[i]]-1] = arr[i]
 		count[arr[i]]--
@@ -51,3 +51,5 @@ func main() {
 	sortedArray := countSort(arr)
 	fmt.Println("Sorted array is:", sortedArray)
 }
+
+//NB: Feel free to uncomment the commented print functions to see the result of each process under the hood.
