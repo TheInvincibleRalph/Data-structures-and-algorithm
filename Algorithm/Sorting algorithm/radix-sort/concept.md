@@ -328,7 +328,7 @@ Let's start by counting the occurrences of each tens digit.
 
 ### Correctly Sorted Array by Tens Place
 
-The final output which is the array sorted by the tens place should now be:
+The final output, which is the array sorted by the tens place, should now be:
 ```
 [3, 9, 10, 27, 38, 43, 82]
 ```
@@ -365,13 +365,15 @@ Consider sorting by the ones place with the array:
 
 2. Count the occurrences of each ones digit:
    ```
-   38 -> 8  => count[8]++
-   27 -> 7  => count[7]++
-   43 -> 3  => count[3]++
-   3  -> 3  => count[3]++
-   9  -> 9  => count[9]++
-   82 -> 2  => count[2]++
-   10 -> 0  => count[0]++
+   Number -> one-th value => count increment
+
+         38 -> 8  => count[8]++
+         27 -> 7  => count[7]++
+         43 -> 3  => count[3]++
+         3  -> 3  => count[3]++
+         9  -> 9  => count[9]++
+         82 -> 2  => count[2]++
+         10 -> 0  => count[0]++
    ```
 
    Resulting count array:
