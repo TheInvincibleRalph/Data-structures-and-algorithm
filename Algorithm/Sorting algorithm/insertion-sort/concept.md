@@ -144,9 +144,8 @@ The array is now sorted:
 
 1. The outer loop iterates through each element starting from the second element.
 2. The `key` variable holds the value of the element to be inserted into the sorted portion of the array.
-3. The inner loop shifts elements to the
+3. The inner loop shifts elements to the right if they are greater than the `key`.
 
-right if they are greater than the `key`.
 4. After finding the correct position, the `key` is inserted into the array.
 
 The use of `j--` allows the inner loop to move backward through the sorted portion of the array, shifting elements as needed to make room for the `key`. This process ensures that the array remains sorted after each iteration of the outer loop.
