@@ -1,5 +1,12 @@
+### Definition
 
-### Insertion Sort Analysis
+The insertion sort algorithm is one of the most basic and simple sorting algorithms. It is an efficient algorithm for small input sizes or for partially sorted data. The algorithm works by sorting elements one at a time, starting with the first element in the list.
+
+Insertion sort is called so because it inserts each element in its correct position in a sorted sub-list12. The basic principle of insertion sort is to insert an unsorted element into a particular sorted position. Hence the name, insertion sort. It is an in-place comparison sorting algorithm that sorts the input list in place without requiring any extra memory.
+
+Next, let's simulate the code in the main.go file
+
+### Insertion Sort Simulation
 
 ```go
 package main
@@ -149,3 +156,7 @@ The array is now sorted:
 4. After finding the correct position, the `key` is inserted into the array.
 
 The use of `j--` allows the inner loop to move backward through the sorted portion of the array, shifting elements as needed to make room for the `key`. This process ensures that the array remains sorted after each iteration of the outer loop.
+
+
+Visit for further study:
+- [Insertion Sort Algorithm](https://www.prostdev.com/post/reviewing-sorting-algorithms-insertion-sort)
