@@ -29,7 +29,7 @@ func main() {
 /*
 On using minIndex
 
-Using minIdx (or a similar variable) correctly maintains the state
+Using minIndex (or a similar variable) correctly maintains the state
 of the smallest index or value found so far during iterations.
 Using i instead would lead to incorrect comparisons and results,
 as i changes with each iteration and doesn't preserve the required
