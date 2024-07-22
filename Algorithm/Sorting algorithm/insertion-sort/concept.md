@@ -158,5 +158,5 @@ The array is now sorted:
 The use of `j--` allows the inner loop to move backward through the sorted portion of the array, shifting elements as needed to make room for the `key`. This process ensures that the array remains sorted after each iteration of the outer loop.
 
 
-Visit for further study:
+### Visit for further study:
 - [Insertion Sort Algorithm](https://www.prostdev.com/post/reviewing-sorting-algorithms-insertion-sort)
