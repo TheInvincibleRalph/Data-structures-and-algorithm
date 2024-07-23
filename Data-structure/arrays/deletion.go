@@ -15,5 +15,5 @@ func deletion(arr []int, index int) []int {
 func main() {
 	arr := []int{10, 20, 30, 40, 50}
 	arr = deletion(arr, 2)
-	fmt.Println("Array after insertion:", arr)
+	fmt.Println("Array after deletion:", arr)
 }
