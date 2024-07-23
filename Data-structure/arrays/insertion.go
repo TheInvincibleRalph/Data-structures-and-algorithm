@@ -9,7 +9,9 @@ func insertion(arr []int, index int, value int) []int {
 	}
 
 	sliceBeforeIndex := arr[:index] //this creates a slice of array that contains elements before the index (the element at the index exclusive)
-	sliceAfterIndex := arr[index:]  //this creates a slice of array that contains elements after the array (the element at the index inclusive)
+	// fmt.Println(sliceBeforeIndex)
+	sliceAfterIndex := arr[index:] //this creates a slice of array that contains elements after the array (the element at the index inclusive)
+	// fmt.Println(sliceAfterIndex)
 
 	arr = append(sliceBeforeIndex, append([]int{value}, sliceAfterIndex...)...) //an array is first created internally with the slice of elements after the index appended to the element at the given index, the result is afterwards appended to the slice before the index
 	return arr
@@ -20,3 +22,5 @@ func main() {
 	arr = insertion(arr, 2, 25) // Insert 25 at index 2
 	fmt.Println("Array after insertion:", arr)
 }
+
+//NB: Feel free to uncomment the commented print functions to see the result of each process under the hood.
