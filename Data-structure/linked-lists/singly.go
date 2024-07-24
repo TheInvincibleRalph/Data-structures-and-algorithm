@@ -35,6 +35,24 @@ func (list *LinkedList) addElementAtEnd(data int) {
 	current.next = newNode //current.next points to newNode
 }
 
+//add element within a list
+
+func (list *LinkedList) addElementAfter(nodeData int, newData int) {
+	newNode := &Node{data: newData}
+	current := list.head
+
+	if list.head == nil {
+		list.head = newNode
+		return
+	}
+
+	for current != nil && current.data != nodeData {
+		current = current.next
+	}
+	newNode.next = current.next
+	current.next = newNode
+}
+
 // PrintList prints all elements in the list
 func (list *LinkedList) PrintList() {
 	current := list.head //instantiate the current node to be the head
@@ -54,6 +72,7 @@ func main() {
 	list.addElementAtEnd(30)
 	list.addElementAtEnd(40)
 	list.addElementAtEnd(50)
+	list.addElementAfter(20, 25)
 
 	fmt.Println("Linked List:")
 	list.PrintList()
