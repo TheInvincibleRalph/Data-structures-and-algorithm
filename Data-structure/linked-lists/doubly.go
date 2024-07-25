@@ -58,6 +58,26 @@ func (dll *DoublyLinkedList) printList() {
 	fmt.Println("Length of list is ", dll.length)
 }
 
+func (dll *DoublyLinkedList) addFromWithin(newData int, nodeData int) {
+	newNode := &Node{data: newData}
+	current := dll.head
+
+	if dll.head == nil {
+		dll.head = newNode
+		return
+	}
+
+	for current != nil && current.data != nodeData {
+		current = current.next
+	}
+	newNode.next = current.next
+	current.next.previous = newNode
+	current.next = newNode
+	newNode.previous = current
+	dll.tail = newNode
+	dll.length++
+}
+
 func main() {
 	list := DoublyLinkedList{}
 
@@ -65,6 +85,7 @@ func main() {
 	list.addFromStart(0)
 	list.addFromStart(20)
 	list.addFromEnd(40)
+	list.addFromWithin(30, 10)
 	fmt.Println("Linked List:")
 	list.printList()
 
