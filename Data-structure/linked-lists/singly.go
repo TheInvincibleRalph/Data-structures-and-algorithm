@@ -12,7 +12,8 @@ type Node struct {
 
 // struct definition for the root node
 type LinkedList struct {
-	head *Node //the root node defined as "head" contains a data and a pointer to the next node
+	head   *Node //the root node defined as "head" contains a data and a pointer to the next node
+	length int
 }
 
 // adds element at the start of a linked list
@@ -113,6 +114,7 @@ func (list *LinkedList) delByValue(value int) {
 		return
 	}
 	current.next = current.next.next
+
 }
 
 // prints all elements in the list
@@ -121,8 +123,11 @@ func (list *LinkedList) PrintList() {
 	for current != nil {
 		fmt.Printf("%d -> ", current.data) //loops through the list and print the data
 		current = current.next             //update the current at every loop pass
+		list.length++
 	}
 	fmt.Println("nil") //default value for the end of a linked list
+	fmt.Println("Length of list is: ", list.length)
+
 }
 
 func main() {
