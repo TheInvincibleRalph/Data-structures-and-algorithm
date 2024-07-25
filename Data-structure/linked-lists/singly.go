@@ -53,6 +53,24 @@ func (list *LinkedList) addElementAfter(nodeData int, newData int) {
 	current.next = newNode
 }
 
+//delete element from the start
+
+func (list *LinkedList) delFromStart() {
+	current := list.head
+	if current.next == nil {
+		return
+	}
+	list.head = list.head.next
+}
+
+func (list *LinkedList) delAfterStart() {
+	current := list.head
+	if current.next == nil {
+		return
+	}
+	current.next = current.next.next
+}
+
 // PrintList prints all elements in the list
 func (list *LinkedList) PrintList() {
 	current := list.head //instantiate the current node to be the head
@@ -73,6 +91,8 @@ func main() {
 	list.addElementAtEnd(40)
 	list.addElementAtEnd(50)
 	list.addElementAfter(20, 25)
+	list.delFromStart()
+	list.delAfterStart()
 
 	fmt.Println("Linked List:")
 	list.PrintList()
