@@ -92,6 +92,29 @@ func (list *LinkedList) delFromEnd() {
 
 }
 
+// deletes element by value
+func (list *LinkedList) delByValue(value int) {
+	if list.head == nil {
+		fmt.Println("List is empty")
+		return
+	}
+
+	if list.head.data == value {
+		list.head = list.head.next
+		return
+	}
+
+	current := list.head
+	for current.next != nil && current.next.data != value {
+		current = current.next
+	}
+	if current.next == nil {
+		fmt.Println("Value not found in the list")
+		return
+	}
+	current.next = current.next.next
+}
+
 // prints all elements in the list
 func (list *LinkedList) PrintList() {
 	current := list.head //instantiate the current node to be the head
@@ -115,6 +138,7 @@ func main() {
 	list.delFromStart()
 	list.delAfterStart()
 	list.delFromEnd()
+	list.delByValue(60)
 	fmt.Println("Linked List:")
 	list.PrintList()
 
