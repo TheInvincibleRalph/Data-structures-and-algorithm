@@ -22,7 +22,7 @@ func (list *LinkedList) addElementAtStart(data int) {
 	list.head = newNode          //replaces root node with the new node
 }
 
-// adds element at the end of a linkedlist
+// add element at the end of a linkedlist
 func (list *LinkedList) addElementAtEnd(data int) {
 	newNode := &Node{data: data}
 	current := list.head
@@ -37,8 +37,7 @@ func (list *LinkedList) addElementAtEnd(data int) {
 	current.next = newNode //current.next points to newNode
 }
 
-//add element within a list
-
+// adds element within a list
 func (list *LinkedList) addElementAfter(nodeData int, newData int) {
 	newNode := &Node{data: newData}
 	current := list.head
@@ -55,7 +54,7 @@ func (list *LinkedList) addElementAfter(nodeData int, newData int) {
 	current.next = newNode
 }
 
-//delete element from the start
+//deletes element from the start
 
 func (list *LinkedList) delFromStart() {
 	current := list.head
@@ -73,7 +72,27 @@ func (list *LinkedList) delAfterStart() {
 	current.next = current.next.next
 }
 
-// PrintList prints all elements in the list
+// deletes from the end
+func (list *LinkedList) delFromEnd() {
+	if list.head == nil {
+		fmt.Println("List is empty")
+		return
+	}
+
+	if list.head.next == nil {
+		list.head = nil
+		return
+	}
+
+	current := list.head
+	for current.next.next != nil {
+		current = current.next
+	}
+	current.next = nil
+
+}
+
+// prints all elements in the list
 func (list *LinkedList) PrintList() {
 	current := list.head //instantiate the current node to be the head
 	for current != nil {
@@ -95,7 +114,7 @@ func main() {
 	list.addElementAfter(20, 25)
 	list.delFromStart()
 	list.delAfterStart()
-
+	list.delFromEnd()
 	fmt.Println("Linked List:")
 	list.PrintList()
 
