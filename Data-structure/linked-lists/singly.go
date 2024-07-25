@@ -1,26 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//struct definition for other nodes
+// struct definition for other nodes
 type Node struct {
 	data int
 	next *Node
 }
 
-//struct definition for the root node
+// struct definition for the root node
 type LinkedList struct {
 	head *Node //the root node defined as "head" contains a data and a pointer to the next node
 }
 
-//adds element at the start of a linked list
+// adds element at the start of a linked list
 func (list *LinkedList) addElementAtStart(data int) {
 	newNode := &Node{data: data} //returns the memory addressnof Node struct so that the newNode variable can modify the struct directly
 	newNode.next = list.head     //instantiate the original root to be the next in the list
 	list.head = newNode          //replaces root node with the new node
 }
 
-//adds element at the end of a linkedlist
+// adds element at the end of a linkedlist
 func (list *LinkedList) addElementAtEnd(data int) {
 	newNode := &Node{data: data}
 	current := list.head
