@@ -43,21 +43,6 @@ func (dll *DoublyLinkedList) addFromEnd(data int) {
 	dll.length++
 }
 
-func (dll *DoublyLinkedList) printList() {
-	if dll.head == nil {
-		fmt.Println("Empty list")
-		return
-	}
-
-	current := dll.head
-	for current != nil {
-		fmt.Printf("%d -> ", current.data)
-		current = current.next
-	}
-	fmt.Println("nil")
-	fmt.Println("Length of list is ", dll.length)
-}
-
 func (dll *DoublyLinkedList) addFromWithin(newData int, nodeData int) {
 	newNode := &Node{data: newData}
 	current := dll.head
@@ -74,7 +59,6 @@ func (dll *DoublyLinkedList) addFromWithin(newData int, nodeData int) {
 	current.next.previous = newNode
 	current.next = newNode
 	newNode.previous = current
-	dll.tail = newNode
 	dll.length++
 }
 
@@ -84,7 +68,11 @@ func (dll *DoublyLinkedList) delFromStart() {
 		return
 	}
 	dll.head = dll.head.next
-	dll.head.previous = nil
+	if dll.head != nil {
+		dll.head.previous = nil
+	} else {
+		dll.tail = nil
+	}
 	dll.length--
 }
 
@@ -96,6 +84,7 @@ func (dll *DoublyLinkedList) delFromEnd() {
 
 	if dll.head.next == nil {
 		dll.head = nil
+		dll.tail = nil
 		return
 	}
 
@@ -116,13 +105,65 @@ func (dll *DoublyLinkedList) delByValue(value int) {
 	}
 
 	current := dll.head
-	for current != nil && current.next.data != value {
+
+	// Check if the node to delete is the head node
+	if dll.head.data == value {
+		dll.delFromStart()
+		return
+	}
+
+	for current.next != nil && current.next.data != value {
 		current = current.next
 	}
+
+	// If the node is not found, return
+	if current.next == nil {
+		fmt.Println("Value not found in list")
+		return
+	}
+
 	current.next = current.next.next
+
+	if current.next != nil {
+		current.next.previous = current
+	} else {
+		dll.tail = current
+	}
 	dll.length--
 
 }
+
+func (dll *DoublyLinkedList) printForward() {
+	if dll.head == nil {
+		fmt.Println("Empty list")
+		return
+	}
+
+	current := dll.head
+	for current != nil {
+		fmt.Printf("%d -> ", current.data)
+		current = current.next
+	}
+	fmt.Println("nil")
+	fmt.Println("Length of list is ", dll.length)
+}
+
+func (dll *DoublyLinkedList) printBackward() {
+	if dll.tail == nil {
+		fmt.Println("Empty list")
+		return
+	}
+
+	current := dll.tail
+
+	for current != nil {
+		fmt.Printf("%d <- ", current.data)
+		current = current.previous
+	}
+	fmt.Println("nil")
+	fmt.Println("Length of list is ", dll.length)
+}
+
 func main() {
 	list := DoublyLinkedList{}
 
@@ -135,6 +176,13 @@ func main() {
 	list.delFromEnd()
 	list.delByValue(10)
 	fmt.Println("Linked List:")
-	list.printList()
+	list.printForward()
+	list.printBackward()
 
 }
+
+/*
+Ensure that when nodes are added to a list,
+all fields (data, previous, next) are properly
+initialized for data integrity sake.
+*/
