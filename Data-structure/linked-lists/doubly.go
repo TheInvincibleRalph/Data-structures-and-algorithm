@@ -88,6 +88,27 @@ func (dll *DoublyLinkedList) delFromStart() {
 	dll.length--
 }
 
+func (dll *DoublyLinkedList) delFromEnd() {
+	if dll.head == nil {
+		fmt.Println("List is empty")
+		return
+	}
+
+	if dll.head.next == nil {
+		dll.head = nil
+		return
+	}
+
+	current := dll.head
+	for current.next.next != nil {
+		current = current.next
+	}
+	current.next = nil
+	dll.tail = current
+	dll.length--
+
+}
+
 func main() {
 	list := DoublyLinkedList{}
 
@@ -97,6 +118,7 @@ func main() {
 	list.addFromEnd(40)
 	list.addFromWithin(30, 10)
 	list.delFromStart()
+	list.delFromEnd()
 	fmt.Println("Linked List:")
 	list.printList()
 
