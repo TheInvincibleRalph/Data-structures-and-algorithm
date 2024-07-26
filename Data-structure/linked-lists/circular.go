@@ -46,6 +46,21 @@ func (cll *CircularLinkedList) addFromStart(data int) {
 	cll.head = newNode
 }
 
+func (cll *CircularLinkedList) addFromEnd(data int) {
+	newNode := &Node{data: data}
+
+	if cll.head == nil {
+		cll.head = newNode
+		cll.tail = newNode
+		newNode.next = newNode
+		newNode.previous = newNode
+	}
+	newNode.next = cll.head
+	newNode.previous = cll.tail
+	cll.tail.next = newNode
+	cll.head.previous = newNode
+}
+
 func main() {
 	list := CircularLinkedList{}
 
@@ -54,6 +69,7 @@ func main() {
 	list.addFromStart(20)
 	list.addFromStart(10)
 	list.addFromStart(0)
+	list.addFromEnd(50)
 	fmt.Println("List is:")
 	list.display()
 }
