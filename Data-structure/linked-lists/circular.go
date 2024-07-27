@@ -81,6 +81,7 @@ func (cll *CircularLinkedList) addFromWithin(nodeData int, newData int) {
 	current.next.previous = newNode
 	current.next = newNode
 }
+
 func main() {
 	list := CircularLinkedList{}
 
