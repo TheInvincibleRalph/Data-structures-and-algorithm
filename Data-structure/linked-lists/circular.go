@@ -60,6 +60,8 @@ func (cll *CircularLinkedList) addFromEnd(data int) {
 	newNode.previous = cll.tail
 	cll.tail.next = newNode
 	cll.head.previous = newNode
+	cll.tail = newNode //updates the tail pointer
+
 }
 
 func (cll *CircularLinkedList) addFromWithin(nodeData int, newData int) {
@@ -80,6 +82,27 @@ func (cll *CircularLinkedList) addFromWithin(nodeData int, newData int) {
 	newNode.previous = current
 	current.next.previous = newNode
 	current.next = newNode
+	newNode.previous = cll.tail
+}
+
+func (cll *CircularLinkedList) deleteFromStart() {
+	if cll.head == nil {
+		fmt.Println("List is empty")
+		return
+	}
+
+	if cll.head.next == cll.head {
+		cll.head = nil // Only one node
+		cll.tail = nil
+		return
+	}
+
+	cll.head.next.previous = cll.tail
+	cll.tail.next = cll.head.next
+	cll.head = cll.head.next
+	// cll.head = cll.head.next
+	// cll.head.next = cll.head
+
 }
 
 func main() {
@@ -92,6 +115,7 @@ func main() {
 	list.addFromStart(0)
 	list.addFromEnd(50)
 	list.addFromWithin(10, 15)
+	list.deleteFromStart()
 	fmt.Println("List is:")
 	list.display()
 }
