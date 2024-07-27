@@ -30,6 +30,22 @@ func (cll *CircularLinkedList) display() {
 	fmt.Println("Head")
 }
 
+func (cll *CircularLinkedList) traverse() {
+	if cll.head == nil {
+		fmt.Println("List is empty")
+		return
+	}
+	current := cll.tail
+	for {
+		fmt.Printf("%d -> ", current.data)
+		current = current.previous
+		if current == cll.head.previous {
+			break
+		}
+	}
+	fmt.Println("Tail")
+}
+
 func (cll *CircularLinkedList) addFromStart(data int) {
 	newNode := &Node{data: data}
 
@@ -72,6 +88,7 @@ func (cll *CircularLinkedList) addFromWithin(nodeData int, newData int) {
 		cll.tail = newNode
 		newNode.next = newNode
 		newNode.previous = newNode
+		return
 	}
 
 	current := cll.head
@@ -82,7 +99,6 @@ func (cll *CircularLinkedList) addFromWithin(nodeData int, newData int) {
 	newNode.previous = current
 	current.next.previous = newNode
 	current.next = newNode
-	newNode.previous = cll.tail
 }
 
 func (cll *CircularLinkedList) deleteFromStart() {
@@ -119,6 +135,29 @@ func (cll *CircularLinkedList) deleteFromEnd() {
 	cll.tail = cll.tail.previous
 }
 
+func (cll *CircularLinkedList) delByValue(value int) {
+	if cll.head == nil {
+		fmt.Println("List is empty")
+		return
+	}
+
+	if cll.head.next == cll.head {
+		cll.head = nil // Only one node
+		cll.tail = nil
+		return
+	}
+
+	current := cll.head
+	for current != nil && current.next.data != value {
+		current = current.next
+		if current == cll.tail {
+			break
+		}
+	}
+	current.next = current.next.next
+	current.next.previous = current
+}
+
 func main() {
 	list := CircularLinkedList{}
 
@@ -131,6 +170,9 @@ func main() {
 	list.addFromWithin(10, 15)
 	list.deleteFromStart()
 	list.deleteFromEnd()
+	list.delByValue(15)
+	list.traverse()
 	fmt.Println("List is:")
 	list.display()
+
 }
