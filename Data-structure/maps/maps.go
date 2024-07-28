@@ -8,9 +8,10 @@ import (
 const bucketcount = 10
 
 type Node struct {
-	key   string
-	value int
-	next  *Node
+	key      string
+	value    int
+	next     *Node
+	previous *Node
 }
 
 type HashTable struct {
@@ -32,10 +33,10 @@ func (ht *HashTable) insert(key string, value int) {
 	} else {
 		current := ht.buckets[index]
 		for current.next != nil {
-			if current.key == key {
-				current.value = value //updates the value if the key alrrady exists.
-				return
-			}
+			// if current.key == key {
+			// 	current.value = value //updates the value if the key already exists.
+			// 	return
+			// }
 			current = current.next
 		}
 		current.next = newNode
@@ -44,8 +45,8 @@ func (ht *HashTable) insert(key string, value int) {
 
 func (ht *HashTable) get(key string) (int, bool) {
 	index := hash(key)
-
 	current := ht.buckets[index]
+
 	for current != nil {
 		if current.key == key {
 			return current.value, true
@@ -55,12 +56,53 @@ func (ht *HashTable) get(key string) (int, bool) {
 	return 0, false
 }
 
+func (ht *HashTable) delete(key string, value int) bool {
+	index := hash(key)
+	current := ht.buckets[index]
+
+	for current != nil {
+		if current.key == key && current.value == value {
+			//if the node to be deleted is the head node
+			if current.previous == nil {
+				current = current.next
+				ht.buckets[index] = current //this updates the head of the linked list, successfully deleting the fisrt element of the array
+				if current.next != nil {
+					current.next.previous = nil
+				}
+			} else {
+				current.previous.next = current.next
+				if current.next != nil {
+					current.next.previous = current.previous
+				}
+			}
+			//if the node to be deleted is not the last node
+
+			return true //indicate successful deletion
+		}
+		current = current.next //move to the next node
+	}
+
+	return false //indicate that the key was not found
+}
+
 func main() {
 	ht := &HashTable{}
 	ht.insert("score", 50)
-	ht.insert("point", 9)
+	ht.insert("point", 60)
+	ht.insert("gp", 10)
+	ht.insert("gp", 12)
+	ht.insert("gp", 22)
+	ht.insert("gup", 12)
+	ht.insert("good", 15)
+	ht.insert("gross", 124)
+	ht.insert("gross", 198)
+	ht.insert("gross", 154)
+	ht.insert("gross", 196)
+	ht.insert("gross", 120)
 
-	value, found := ht.get("score")
+	// fmt.Println(ht)
+	ht.delete("gross", 124)
+	value, found := ht.get("gross")
 	if found {
 		fmt.Println("Found value:", value)
 	} else {

@@ -127,3 +127,18 @@ nestedMap["vegetables"] = map[string]int{
 fmt.Println(nestedMap["fruits"]["apple"])  // Output: 5
 fmt.Println(nestedMap["vegetables"]["carrot"]) // Output: 3
 ```
+
+### Collision within Buckets
+
+In a hash table, a **bucket** is a storage location where data is kept. Each bucket can hold one or more pieces of data. When multiple pieces of data end up in the same bucket (a situation called a "collision"), they are typically stored in a linked list within that bucket.
+
+Here's a simplified explanation:
+
+1. **Hashing**: When you add a key-value pair to a hash table, a hash function calculates an index based on the key. This index determines which bucket to store the data in.
+
+2. **Buckets and Linked Lists**: If two different keys hash to the same bucket, the hash table uses a linked list to store these items. The bucket contains a pointer to the first node in the list. Each node contains a key, a value, and a pointer to the next node in the list.
+
+3. **Handling Collisions**: When inserting a new item, if the target bucket already contains items (i.e., the linked list has nodes), the new item is added to the list. This helps manage collisions by chaining items together.
+
+
+
