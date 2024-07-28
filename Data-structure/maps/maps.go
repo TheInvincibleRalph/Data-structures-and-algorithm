@@ -103,6 +103,17 @@ func (ht *HashTable) printBucket(index int) {
 	}
 }
 
+func (ht *HashTable) printBucketCount() {
+	for i, bucket := range ht.buckets {
+		current := bucket
+		fmt.Printf("Bucket %d -> ", i)
+		for current != nil {
+			fmt.Printf("%s: %d\n", current.key, current.value)
+			current = current.next
+		}
+	}
+}
+
 func main() {
 	ht := &HashTable{}
 	ht.insert("score", 50)
@@ -119,6 +130,7 @@ func main() {
 	ht.insert("gross", 120)
 	ht.print()
 	ht.printBucket(4)
+	ht.printBucketCount()
 
 	// fmt.Println(ht)
 	ht.delete("gross", 124)
