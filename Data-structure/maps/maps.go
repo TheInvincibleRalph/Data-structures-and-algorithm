@@ -85,6 +85,24 @@ func (ht *HashTable) delete(key string, value int) bool {
 	return false //indicate that the key was not found
 }
 
+func (ht *HashTable) print() {
+	for _, bucket := range ht.buckets {
+		current := bucket
+		for current != nil {
+			fmt.Printf("%s: %d\n", current.key, current.value)
+			current = current.next
+		}
+	}
+}
+
+func (ht *HashTable) printBucket(index int) {
+	current := ht.buckets[index]
+	for current != nil {
+		fmt.Printf("%s: %d\n", current.key, current.value)
+		current = current.next
+	}
+}
+
 func main() {
 	ht := &HashTable{}
 	ht.insert("score", 50)
@@ -99,6 +117,8 @@ func main() {
 	ht.insert("gross", 154)
 	ht.insert("gross", 196)
 	ht.insert("gross", 120)
+	ht.print()
+	ht.printBucket(4)
 
 	// fmt.Println(ht)
 	ht.delete("gross", 124)
