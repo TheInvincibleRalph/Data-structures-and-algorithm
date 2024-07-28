@@ -114,6 +114,19 @@ func (ht *HashTable) printBucketCount() {
 	}
 }
 
+func (ht *HashTable) search(key string) (int, bool) {
+	index := hash(key)
+	current := ht.buckets[index]
+
+	for current != nil {
+		if current.key == key {
+			return current.value, true
+		}
+		current = current.next
+	}
+	return 0, false
+}
+
 func main() {
 	ht := &HashTable{}
 	ht.insert("score", 50)
@@ -131,6 +144,7 @@ func main() {
 	ht.print()
 	ht.printBucket(4)
 	ht.printBucketCount()
+	ht.search("gross")
 
 	// fmt.Println(ht)
 	ht.delete("gross", 124)
