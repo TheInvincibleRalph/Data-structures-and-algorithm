@@ -17,6 +17,7 @@ type Node struct {
 type HashTable struct {
 	buckets []*Node //each element in the array is a pointer to a Node structure
 	size    int
+	count   int
 }
 
 func hash(key string, size int) int {
@@ -34,13 +35,20 @@ func (ht *HashTable) insert(key string, value int) {
 	} else {
 		current := ht.buckets[index]
 		for current.next != nil {
-			// if current.key == key {
-			// 	current.value = value //updates the value if the key already exists.
-			// 	return
-			// }
+			if current.key == key {
+				current.value = value //updates the value if the key already exists.
+				return
+			}
 			current = current.next
 		}
 		current.next = newNode
+		newNode.previous = current
+
+	}
+	ht.count++
+
+	if float64(ht.count)/float64(ht.size) > 0.7 {
+		ht.resize(ht.size * 2) //doubles the array size when the load factor is greater than 0.7
 	}
 }
 
@@ -77,7 +85,7 @@ func (ht *HashTable) delete(key string, value int) bool {
 				}
 			}
 			//if the node to be deleted is not the last node
-
+			ht.count--
 			return true //indicate successful deletion
 		}
 		current = current.next //move to the next node
@@ -91,6 +99,7 @@ func (ht *HashTable) print() {
 		current := bucket
 		for current != nil {
 			fmt.Printf("%s: %d\n", current.key, current.value)
+			ht.count++
 			current = current.next
 		}
 	}
@@ -150,6 +159,18 @@ func (ht *HashTable) resize(s int) {
 	ht.size = new.size       //updates the size of the old hash table
 }
 
+func (ht *HashTable) loadFactor() float64 {
+	var count int
+	for _, bucket := range ht.buckets {
+		current := bucket
+		for current != nil {
+			count++
+			current = current.next
+		}
+	}
+	return float64(count) / float64(ht.size)
+}
+
 func main() {
 	ht := NewHashTable(bucketcount)
 	ht.insert("score", 50)
@@ -168,6 +189,7 @@ func main() {
 	ht.printBucket(4)
 	ht.printBucketCount()
 	ht.search("gross")
+	ht.loadFactor()
 	ht.resize(20)
 
 	// fmt.Println(ht)
