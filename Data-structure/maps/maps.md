@@ -128,6 +128,8 @@ fmt.Println(nestedMap["fruits"]["apple"])  // Output: 5
 fmt.Println(nestedMap["vegetables"]["carrot"]) // Output: 3
 ```
 
+## Concepts in Hashmaps
+
 ### Collision within Buckets
 
 In a hash table, a **bucket** is a storage location where data is kept. Each bucket can hold one or more pieces of data. When multiple pieces of data end up in the same bucket (a situation called a "collision"), they are typically stored in a linked list within that bucket.
@@ -141,4 +143,19 @@ Here's a simplified explanation:
 3. **Handling Collisions**: When inserting a new item, if the target bucket already contains items (i.e., the linked list has nodes), the new item is added to the list. This helps manage collisions by chaining items together.
 
 
+### Load Factor
 
+- **Definition**: The load factor of a hash table is a measure of how full the hash table is. It is typically calculated as the ratio of the number of elements (`n`) to the number of buckets (`m`).
+- **Formula**: Load Factor = `n / m`
+  - `n`: Number of elements (or key-value pairs) stored in the hash table.
+  - `m`: Number of buckets or slots in the hash table.
+
+#### Why Resize?
+
+- **Performance**: When a hash table has a high load factor, it means that many of the buckets are likely to have multiple elements (chains), leading to longer search times. This can degrade the performance of the hash table, particularly for operations like insert, delete, and search.
+- **Threshold**: To maintain efficient operation, hash tables often resize (increase the number of buckets) when the load factor exceeds a certain threshold. A common threshold is 0.7, meaning that if more than 70% of the buckets are filled, the hash table is resized.
+
+#### Resizing Process
+
+1. **Increase Size**: The number of buckets is increased, usually doubled.
+2. **Rehashing**: All the existing elements are rehashed and placed into the new, larger array of buckets. This is necessary because the hash function depends on the size of the array, and changing the array size alters the hash values.
