@@ -94,6 +94,7 @@ func (ht *HashTable) delete(key string, value int) bool {
 	return false //indicate that the key was not found
 }
 
+// print function prints all the elements in the hash table
 func (ht *HashTable) print() {
 	for _, bucket := range ht.buckets {
 		current := bucket
@@ -105,6 +106,7 @@ func (ht *HashTable) print() {
 	}
 }
 
+// printBucket function prints the elements in a bucket
 func (ht *HashTable) printBucket(index int) {
 	current := ht.buckets[index]
 	for current != nil {
@@ -113,6 +115,7 @@ func (ht *HashTable) printBucket(index int) {
 	}
 }
 
+// printBucketCount function prints the number of elements in each bucket
 func (ht *HashTable) printBucketCount() {
 	for i, bucket := range ht.buckets {
 		current := bucket
@@ -124,6 +127,7 @@ func (ht *HashTable) printBucketCount() {
 	}
 }
 
+// search function searches for a key in the hash table
 func (ht *HashTable) search(key string) (int, bool) {
 	index := hash(key, ht.size)
 	current := ht.buckets[index]
@@ -137,6 +141,7 @@ func (ht *HashTable) search(key string) (int, bool) {
 	return 0, false
 }
 
+// NewHashTable creates a new hash table with the specified size
 func NewHashTable(s int) *HashTable {
 	return &HashTable{
 		buckets: make([]*Node, s), //creates an array of pointers to Node structures
@@ -159,16 +164,16 @@ func (ht *HashTable) resize(s int) {
 	ht.size = new.size       //updates the size of the old hash table
 }
 
+// loadFactor function calculates the load factor of the hash table
 func (ht *HashTable) loadFactor() float64 {
-	var count int
 	for _, bucket := range ht.buckets {
 		current := bucket
 		for current != nil {
-			count++
+			ht.count++
 			current = current.next
 		}
 	}
-	return float64(count) / float64(ht.size)
+	return float64(ht.count) / float64(ht.size)
 }
 
 func main() {
