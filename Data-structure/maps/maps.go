@@ -5,7 +5,7 @@ import (
 	"hash/fnv"
 )
 
-const bucketcount = 10
+const bucketcount = 10 //initial size of the array
 
 type Node struct {
 	key      string
@@ -15,17 +15,18 @@ type Node struct {
 }
 
 type HashTable struct {
-	buckets [bucketcount]*Node //each element in the array is a pointer to a Node structure
+	buckets []*Node //each element in the array is a pointer to a Node structure
+	size    int
 }
 
-func hash(key string) int {
+func hash(key string, size int) int {
 	hasher := fnv.New32a()
-	hasher.Write([]byte(key))                //writes the key (converted to bytes)  to the hash function
-	return int(hasher.Sum32() % bucketcount) //this makes sure the value returned fits within the array bounds
+	hasher.Write([]byte(key))                 //writes the key (converted to bytes)  to the hash function
+	return int(hasher.Sum32() % uint32(size)) //this makes sure the value returned fits within the array bounds or size of the array
 }
 
 func (ht *HashTable) insert(key string, value int) {
-	index := hash(key)
+	index := hash(key, ht.size)
 	newNode := &Node{key: key, value: value}
 
 	if ht.buckets[index] == nil {
@@ -44,7 +45,7 @@ func (ht *HashTable) insert(key string, value int) {
 }
 
 func (ht *HashTable) get(key string) (int, bool) {
-	index := hash(key)
+	index := hash(key, ht.size)
 	current := ht.buckets[index]
 
 	for current != nil {
@@ -57,7 +58,7 @@ func (ht *HashTable) get(key string) (int, bool) {
 }
 
 func (ht *HashTable) delete(key string, value int) bool {
-	index := hash(key)
+	index := hash(key, ht.size)
 	current := ht.buckets[index]
 
 	for current != nil {
@@ -115,7 +116,7 @@ func (ht *HashTable) printBucketCount() {
 }
 
 func (ht *HashTable) search(key string) (int, bool) {
-	index := hash(key)
+	index := hash(key, ht.size)
 	current := ht.buckets[index]
 
 	for current != nil {
@@ -127,8 +128,30 @@ func (ht *HashTable) search(key string) (int, bool) {
 	return 0, false
 }
 
+func NewHashTable(s int) *HashTable {
+	return &HashTable{
+		buckets: make([]*Node, s), //creates an array of pointers to Node structures
+		size:    s,
+	}
+}
+
+// resize function resizes the array when the load factor is greater than 0.7
+func (ht *HashTable) resize(s int) {
+	new := NewHashTable(s) //creates a new hash table with the new size
+	for _, bucket := range ht.buckets {
+		current := bucket
+		for current != nil {
+			new.insert(current.key, current.value) //inserts the key-value pair into the new hash table
+			current = current.next
+
+		}
+	}
+	ht.buckets = new.buckets //copies the new hash table to the old hash table
+	ht.size = new.size       //updates the size of the old hash table
+}
+
 func main() {
-	ht := &HashTable{}
+	ht := NewHashTable(bucketcount)
 	ht.insert("score", 50)
 	ht.insert("point", 60)
 	ht.insert("gp", 10)
@@ -145,6 +168,7 @@ func main() {
 	ht.printBucket(4)
 	ht.printBucketCount()
 	ht.search("gross")
+	ht.resize(20)
 
 	// fmt.Println(ht)
 	ht.delete("gross", 124)
