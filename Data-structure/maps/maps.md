@@ -159,3 +159,11 @@ Here's a simplified explanation:
 
 1. **Increase Size**: The number of buckets is increased, usually doubled.
 2. **Rehashing**: All the existing elements are rehashed and placed into the new, larger array of buckets. This is necessary because the hash function depends on the size of the array, and changing the array size alters the hash values.
+
+### Open Addressing
+Open addressing is a collision resolution strategy used in hash tables. Instead of using linked lists to store multiple elements that hash to the same slot (as in chaining), open addressing stores all elements directly in the hash table array. When a collision occurs, the algorithm seeks the next available slot in the array according to a specific sequence until an empty slot is found.
+
+### Common Open Addressing Techniques
+1. **Linear Probing**: Incrementally checks the next slot (with wrap-around) until an empty slot is found.
+2. **Quadratic Probing**: Uses a quadratic function to determine the next slot to check.
+3. **Double Hashing**: Applies a second hash function to resolve collisions, using the output to determine the step size.
