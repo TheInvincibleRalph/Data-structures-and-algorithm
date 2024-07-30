@@ -22,9 +22,13 @@ func (s *Stack) pop() int {
 	return item
 }
 
-// func (s *Stack) peek() int {
-// 	return
-// }
+func (s *Stack) peek() int {
+	if len(s.items) == 0 {
+		fmt.Println("Stack is empty")
+		return -1
+	}
+	return s.items[len(s.items)-1]
+}
 
 func main() {
 	stack := Stack{}
@@ -37,5 +41,6 @@ func main() {
 	// stack.pop()
 	fmt.Println(stack.pop())
 	fmt.Println(stack)
+	fmt.Println(stack.peek())
 
 }
