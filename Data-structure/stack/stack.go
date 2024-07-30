@@ -6,11 +6,12 @@ type Stack struct {
 	items []int
 }
 
-// this adds an item to the stack
+//adds an item to the stack
 func (s *Stack) push(item int) {
 	s.items = append(s.items, item)
 }
 
+//removes the last item added
 func (s *Stack) pop() int {
 	if len(s.items) == 0 {
 		fmt.Println("Stack is empty")
@@ -21,6 +22,10 @@ func (s *Stack) pop() int {
 	return item
 }
 
+// func (s *Stack) peek() int {
+// 	return
+// }
+
 func main() {
 	stack := Stack{}
 
@@ -29,7 +34,8 @@ func main() {
 	stack.push(15)
 	stack.push(20)
 	stack.push(25)
-	stack.pop()
-
+	// stack.pop()
+	fmt.Println(stack.pop())
 	fmt.Println(stack)
+
 }
