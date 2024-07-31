@@ -45,3 +45,48 @@ func (d *Deque) removeBack() int {
 	d.items = d.items[:len(d.items)-1]
 	return item
 }
+
+// returns the first item of the deque without removing it
+func (d *Deque) peekFront() int {
+	if len(d.items) == 0 {
+		fmt.Println("Deque is empty")
+		return -1
+	}
+	return d.items[0]
+}
+
+// returns the last item of the deque without removing it
+func (d *Deque) peekBack() int {
+	if len(d.items) == 0 {
+		fmt.Println("Deque is empty")
+		return -1
+	}
+	return d.items[len(d.items)-1]
+}
+
+// checks if the deque is empty
+func (d *Deque) isEmpty() bool {
+	return len(d.items) == 0
+}
+
+// returns the size of the deque
+func (d *Deque) size() int {
+	return len(d.items)
+}
+
+func main() {
+	deque := Deque{}
+
+	deque.addFront(5)
+	deque.addFront(10)
+	deque.addFront(15)
+	deque.addFront(20)
+	deque.addFront(25)
+
+	fmt.Println(deque.removeFront())
+	fmt.Println(deque)
+	fmt.Println(deque.peekFront())
+	fmt.Println(deque.peekBack())
+	fmt.Println(deque.isEmpty())
+	fmt.Println(deque.size())
+}
