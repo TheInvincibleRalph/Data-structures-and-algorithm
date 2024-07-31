@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Deque struct {
 	items []int
 }
@@ -20,4 +22,26 @@ func (d *Deque) anotherAddFront(item int) {
 // add an item to the back of the deque
 func (d *Deque) addBack(item int) {
 	d.items = append(d.items, item)
+}
+
+// remove the first item from the deque
+func (d *Deque) removeFront() int {
+	if len(d.items) == 0 {
+		fmt.Println("Deque is empty")
+		return -1
+	}
+	item := d.items[0]
+	d.items = d.items[1:]
+	return item
+}
+
+// remove the last item from the deque
+func (d *Deque) removeBack() int {
+	if len(d.items) == 0 {
+		fmt.Println("Deque is empty")
+		return -1
+	}
+	item := d.items[len(d.items)-1]
+	d.items = d.items[:len(d.items)-1]
+	return item
 }
