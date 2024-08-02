@@ -76,6 +76,17 @@ func (h *Heap) insert(k int) {
 	h.heapifyUp(len(h.items) - 1)
 }
 
+func (h *Heap) extractMin() int {
+	if len(h.items) == 0 {
+		return -1
+	}
+	min := h.items[0]                    //saves the root node
+	h.items[0] = h.items[len(h.items)-1] //replace the root node with the last node
+	h.items = h.items[:len(h.items)-1]   //remove the last node
+	h.heapifyDown(0)
+	return min
+}
+
 func main() {
 	heap := Heap{}
 	heap.items = []int{10, 5, 3, 2, 4}
@@ -89,6 +100,7 @@ func main() {
 	heap.insert(6)
 	fmt.Println(heap.items)
 
-	// heap.heapifyDown(0) //heapify the heap starting from the root node (index 0)
+	fmt.Println(heap.extractMin())
+	fmt.Println(heap.items)
 
 }
