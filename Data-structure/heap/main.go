@@ -87,6 +87,14 @@ func (h *Heap) extractMin() int {
 	return min
 }
 
+func (h *Heap) peek() int {
+	if len(h.items) == 0 {
+		fmt.Println("Heap is empty")
+		return -1
+	}
+	return h.items[0]
+}
+
 func main() {
 	heap := Heap{}
 	heap.items = []int{10, 5, 3, 2, 4}
@@ -102,5 +110,7 @@ func main() {
 
 	fmt.Println(heap.extractMin())
 	fmt.Println(heap.items)
+
+	fmt.Println(heap.peek())
 
 }
