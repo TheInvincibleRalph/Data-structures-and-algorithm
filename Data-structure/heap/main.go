@@ -30,6 +30,12 @@ func (h *Heap) swap(i, j int) {
 
 // <=================================Heapify Functions=================================>
 
+func (h *Heap) heapify() {
+	for i := len(h.items)/2 - 1; i >= 0; i-- { //starts iteration from the last non-leaf node (usually at n/2 - 1)
+		h.heapifyDown(i)
+	}
+}
+
 func (h *Heap) heapifyDown(i int) {
 	for {
 		left := left(i)
@@ -65,11 +71,24 @@ func (h *Heap) heapifyUp(i int) {
 	}
 }
 
+func (h *Heap) insert(k int) {
+	h.items = append(h.items, k)
+	h.heapifyUp(len(h.items) - 1)
+}
+
 func main() {
 	heap := Heap{}
 	heap.items = []int{10, 5, 3, 2, 4}
-	// heap.heapifyUp(len(heap.items) - 1) //heapify the heap starting from the last node
-	// fmt.Println(heap.items)
-	heap.heapifyDown(0) //heapify the heap starting from the root node (index 0)
+	heap.heapify()
 	fmt.Println(heap.items)
+
+	heap.insert(1)
+	heap.insert(15)
+	heap.insert(7)
+	heap.insert(8)
+	heap.insert(6)
+	fmt.Println(heap.items)
+
+	// heap.heapifyDown(0) //heapify the heap starting from the root node (index 0)
+
 }
