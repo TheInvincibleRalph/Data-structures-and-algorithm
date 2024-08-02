@@ -28,7 +28,7 @@ func (h *Heap) swap(i, j int) {
 	h.items[i], h.items[j] = h.items[j], h.items[i]
 }
 
-//heapifyDown moves the element at index i down the heap
+// <=================================Heapify Functions=================================>
 
 func (h *Heap) heapifyDown(i int) {
 	for {
@@ -58,9 +58,18 @@ func (h *Heap) heapifyDown(i int) {
 	}
 }
 
+func (h *Heap) heapifyUp(i int) {
+	for i > 0 && h.items[parent(i)] > h.items[i] {
+		h.swap(i, parent(i))
+		i = parent(i)
+	}
+}
+
 func main() {
 	heap := Heap{}
 	heap.items = []int{10, 5, 3, 2, 4}
+	// heap.heapifyUp(len(heap.items) - 1) //heapify the heap starting from the last node
+	// fmt.Println(heap.items)
 	heap.heapifyDown(0) //heapify the heap starting from the root node (index 0)
 	fmt.Println(heap.items)
 }
