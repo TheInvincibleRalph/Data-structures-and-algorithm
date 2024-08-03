@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Items struct {
 	value    int
 	priority int
@@ -89,4 +91,31 @@ func (pq *PriorityQueue) peek() (int, int) {
 		return -1, -1 // or some error value
 	}
 	return pq.items[0].value, pq.items[0].priority
+}
+
+func main() {
+	pq := &PriorityQueue{}
+
+	// Insert elements with priorities
+	pq.insert(10, 3)
+	pq.insert(5, 2)
+	pq.insert(3, 1)
+	pq.insert(2, 4)
+	pq.insert(4, 5)
+
+	fmt.Println("Priority Queue after inserts:", pq.items)
+
+	// Extract the minimum element
+	value, priority := pq.extractMin()
+	fmt.Println("Extracted Min:", value, "with priority", priority)
+	fmt.Println("Priority Queue after extracting min:", pq.items)
+
+	// Peek the minimum element
+	value, priority = pq.peek()
+	fmt.Println("Peek Min:", value, "with priority", priority)
+
+	// Extract the minimum element again
+	value, priority = pq.extractMin()
+	fmt.Println("Extracted Min:", value, "with priority", priority)
+	fmt.Println("Priority Queue after extracting min:", pq.items)
 }
