@@ -55,7 +55,7 @@ Here's a step-by-step simulation with a circular queue of capacity 5.
  ## Simulation of the Full Condition
 
 1. **Initialization**:
-   - Create a circular queue with a capacity of 5. The underlying array has 6 slots.
+   - Create a circular queue with a capacity of 5. The underlying array, however, should have 6 slots. 
    - `front` and `rear` both start at 0.
 
 2. **Enqueue Operations**:
@@ -82,3 +82,17 @@ Here's a step-by-step simulation with a circular queue of capacity 5.
 
 - The extra slot in the array helps in distinguishing between full and empty states.
 - The full condition `(rear + 1) % capacity == front` is used to confirm the queue is full.
+
+## The Empty Condition `front == rear`
+
+- The `front` points to the position of the first element in the queue (the next one to be dequeued).
+- The `rear` points to the position just after the last element in the queue (where the next element will be enqueued)
+
+### Why the condition?
+
+The front pointer shows the position of the next element to be dequeued, and if it is the same as the rear pointer (which points to the space where the next element will be enqueued), then there are no elements to dequeue and by extension, the queue is empty.
+
+### Extra points:
+- The front position is always one position ahead of the rear position in a non-empty circular queue.
+- Since the queue is circular, the rear position can be at the beginning of the queue when the end of the queue is reached (this is called wrapping to zero).
+- The front and rear pointers cannot be pointing to the same position, if that happens, the queue is said to be empty.
